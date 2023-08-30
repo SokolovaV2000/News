@@ -1,0 +1,49 @@
+1.
+from django.contrib.auth.models import User
+user_1 = User.objects.create_user('ivanov')
+user_1.save()
+user_2 = User.objects.create_user('petrov')
+user_2.save()
+2.
+from NewsPaper.models import Author
+author_1 = user_1
+author_1.save()
+author_2 = user_2
+author_2.save()
+3.
+from NewsPaper.models import Category
+cat_1 = Category.objects.create(name = 'Политика')
+cat_1.save()
+cat_2 = Category.objects.create(name = 'Экономика')
+cat_2.save
+cat_3 = Category.objects.create(name = 'Спорт')
+cat_3.save
+cat_4 = Category.objects.create(name = 'Психология')
+cat_4.save
+4.
+from NewsPaper.models import Post
+post_1 = Post.objects.create(type = 'AR', head = 'Статья о психологии спорта', body = 'Данная статья рассказывает об особенностях психологии спорта', author = Author.author_1, category = 'Психология')
+post_1.save()
+post_2 = Post.objects.create(type = 'NW', head = 'Новость о политике и экономике', body = 'Эта новость о событиях в политике и эконоике за последнюю неделю', author = Author.author_2, сategory = 'Политика')
+post_2.save()
+post_3 = Post.objects.create(type = 'NW', head = 'Новость о спорте и политике', body = 'А тут освещаются происшествия из спорта и экономики', author = Author.author_1, category = 'Спорт')
+post_2.save()
+5.
+from NewsPaper.models import PostCategory
+pc_1 = PostCategory.objects.create(post_id = 1, category_id = 3)
+pc_1.save()
+pc_2 = PostCategory.objects.create(post_id = 2, category_id = 2)
+pc_2.save()
+pc_3 = PostCategory.objects.create(post_id = 3, category_id = 1)
+pc_3.save()
+6.
+from NewsPaper.models import Comment
+comm_1 = Comment.object.create(body = 'Хорошая статья!', post = Post.post_1)
+comm_1.save()
+comm_2 = Comment.object.create(body = 'Плохие новости', post = Post.post_3)
+comm_2.save()
+comm_3 = Comment.object.create(body = 'Интересно почитать', post = Post.post_2)
+comm_3.save()
+comm_4 = Comment.object.create(body = 'Ничего полезного', post = Post.post_3)
+comm_4.save()
+7.
