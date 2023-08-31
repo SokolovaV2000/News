@@ -10,6 +10,9 @@ class Author(models.Model):
 class Category(models.Model):
     name = models.CharField('Категория', max_length=255, unique=True)
 
+    def __str__(self):
+        return self.name.title()
+
 
 Article = 'AR'
 News = "NW"
@@ -21,12 +24,16 @@ CHOICE = [
 
 class Post(models.Model):
     type = models.CharField('Тип', max_length=2, choices=CHOICE, default=Article)
-    head = models.CharField('Заголовок', max_length=255)
+    head = models.CharField('Заголовок', max_length=255, unique=True)
     body = models.TextField('Текст')
     time_of = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     category = models.ManyToManyField(Category, through='PostCategory')
     rating = models.IntegerField(default=0)
+    related_name='posts'
+
+    def __str__(self):
+        return f'{self.head.title()}: {self.body[:124]}'
 
     def like(self):
         self.rating += 1
