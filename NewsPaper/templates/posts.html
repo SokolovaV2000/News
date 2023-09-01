@@ -8,6 +8,16 @@ News
 {% block content %}
 <h1>Все статьи</h1>
 <h3>{% current_time '%b %d %Y' %}</h3>
+<form action="" method="get">
+       {{ filterset.form.as_p }}
+        <label for="start">Start date:</label>
+
+
+    <input type="date" id="start" name="trip-start" value="2023-08-31" min="2023-08-31" max="2024-08-31" />
+
+       <input type="submit" value="Найти" />
+   </form>
+
 {% if posts %}
 <table>
            <tr>
@@ -27,4 +37,22 @@ News
 {% else %}
 <h2> Ничего нового... Ждем новостей! </h2>
 {% endif %}
+
+   {% if page_obj.has_previous %}
+       <a href="?{% url_replace page=1 %}">1</a>
+       {% if page_obj.previous_page_number != 1 %}
+           ...
+           <a href="?{% url_replace page=page_obj.previous_page_number %}">{{ page_obj.previous_page_number }}</a>
+       {% endif %}
+   {% endif %}
+
+   {{ page_obj.number }}
+
+   {% if page_obj.has_next %}
+       <a href="?{% url_replace page=page_obj.next_page_number %}">{{ page_obj.next_page_number }}</a>
+       {% if paginator.num_pages != page_obj.next_page_number %}
+           ...
+           <a href="?{% url_replace page=page_obj.paginator.num_pages %}">{{ page_obj.paginator.num_pages }}</a>
+       {% endif %}
+   {% endif %}
 {% endblock content %}

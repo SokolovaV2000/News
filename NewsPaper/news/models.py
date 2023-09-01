@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 
 class Author(models.Model):
@@ -31,6 +32,13 @@ class Post(models.Model):
     category = models.ManyToManyField(Category, through='PostCategory')
     rating = models.IntegerField(default=0)
     related_name='posts'
+
+    def get_context_data(self):
+        context = super().get_context_data(**kwargs)
+        context['filterset'] = self.filterset
+        return context
+    def get_absolute_url(self):
+        return reverse('post_detail', args=[str(self.id)])
 
     def __str__(self):
         return f'{self.head.title()}: {self.body[:124]}'
