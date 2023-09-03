@@ -1,0 +1,10 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+Вы оформили подписку на сайте
+{% endblock title %}
+
+{% block content %}
+<h2>{{ appointment.client_name }}, спасибо за Вашу подписку!</h2>
+    <p> Вы подписались на {{ appointment.date|date:"d-M-Y" }} по вопросу: {{ appointment.message|truncatechars:50 }} </p>
+{% endblock content %}

@@ -1,4 +1,4 @@
-{% extends "default.html" %}
+{% extends "flatpages/default.html" %}
 
 {% block content %}
 <h2>Страница авторизованного пользователя {{request.user.username}}</h2>
@@ -8,4 +8,4 @@
 {% if is_not_premium %}
 <button> <a href="sign/upgrade/"> Стать автором</a> </button>
 {% endif %}
-{% endblock %}
+{% endblock content %}
