@@ -162,7 +162,7 @@ STATICFILES_DIRS = [
 EMAIL_HOST = 'smtp.yandex.ru' 
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'sokolovav2000'
-EMAIL_HOST_PASSWORD = 'V45babayagodkaopat'
+EMAIL_HOST_PASSWORD = '*'
 EMAIL_USE_SSL = True
 
 ADMINS = [
