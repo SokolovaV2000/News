@@ -1,17 +1,19 @@
 {% extends 'flatpages/default.html' %}
 
 {% block title %}
-Make a subscribe
+Оформить подписку
 {% endblock title %}
 
 {% block content %}
 <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            <label for="client_name">Your name</label>
-            <input type="text" name="client_name"><br>
-            <label for="message">Short descr</label>
-            <input type="text" name="message"><br>
-            <label for="date">Time</label>
-            <input type="date" name="date">.<br>
-            <input type="submit">
+    <label for="name">Ваше имя</label>
+    <input type="text" name="name"><br>
+    <label for="category">Категория, на которую вы хотите подписаться</label>
+    <label><input type="radio" name="category">Психология</label>
+    <label><input type="radio" name="category">Спорт</label>
+    <label><input type="radio" name="category">Политика</label>
+    <label><input type="radio" name="category">Экономика</label>
+    <input type="submit" value="Оформить" />
+</form>
 {% endblock content %}

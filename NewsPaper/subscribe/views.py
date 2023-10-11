@@ -14,24 +14,37 @@ class SubscribeView(View):
 
     def post(self, request, *args, **kwargs):
         sub = Subscribe(
-            date=datetime.strptime(request.POST['date'], '%Y-%m-%d'),
-            client_name=request.POST['client_name'],
-            message=request.POST['message'],
+            name=request.POST['name'],
+            category=request.POST['category'],
         )
         sub.save()
+
+        send_mail(
+            subject=f'Новая подписка на рассылку от {sub.name}',
+            message=f'Пользователь подписался на рассылку в категории {sub.category}',
+            from_email='sokolovav2000@yandex.ru',
+            recipient_list=['sokolovava2@mail.ru']
+        )
+
         html_content = render_to_string(
             'sub_created.html',
             {
-                'subscribe': sub,
+                'sub': sub,
             }
         )
 
         msg = EmailMultiAlternatives(
-            subject=f'{sub.client_name} {sub.date.strftime("%Y-%M-%d")}',
-            body=sub.message,  # это то же, что и message
+            subject=f'{sub.name}',
+            body=sub.category,
             from_email='sokolovav2000@yandex.ru',
-            to=['sokolovava2@mail.ru'],  # это то же, что и recipients_list
+            to=['sokolovava2@mail.ru'],
         )
         msg.attach_alternative(html_content, "text/html")  # добавляем html
         msg.send()
+
+        mail_admins(
+            subject=f'Новая подписка на категорию',
+            message=f'Пользователь {sub.name} подписался на рассылку в категории {sub.category}',
+        )
+
         return redirect('/subscribe')

@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'subscribe',
 ]
+DEFAULT_FROM_EMAIL = 'sokolovav2000@yandex.ru'
+
 LOGIN_URL = 'accounts/login/'
 LOGIN_REDIRECT_URL = '/login'
 WSGI_APPLICATION = 'NewsPaper.wsgi.application'
@@ -159,6 +161,12 @@ STATICFILES_DIRS = [
 
 EMAIL_HOST = 'smtp.yandex.ru' 
 EMAIL_PORT = 465
-EMAIL_HOST_USER = '*'
-EMAIL_HOST_PASSWORD = '*'
+EMAIL_HOST_USER = 'sokolovav2000'
+EMAIL_HOST_PASSWORD = 'V45babayagodkaopat'
 EMAIL_USE_SSL = True
+
+ADMINS = [
+    ('Sokolova', 'sokolovava2@mail.ru'),
+]
+SERVER_EMAIL = 'sokolovav2000@yandex.ru'
+
