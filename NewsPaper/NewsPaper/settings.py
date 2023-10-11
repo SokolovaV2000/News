@@ -170,3 +170,8 @@ ADMINS = [
 ]
 SERVER_EMAIL = 'sokolovav2000@yandex.ru'
 
+CELERY_BROKER_URL = 'redis://i5jORmkc04UOkO11zzllr39OVWBSGsJR@redis-15554.c1.asia-northeast1-1.gce.cloud.redislabs.com:15554'
+CELERY_RESULT_BACKEND = 'redis://i5jORmkc04UOkO11zzllr39OVWBSGsJR@redis-15554.c1.asia-northeast1-1.gce.cloud.redislabs.com:15554'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
