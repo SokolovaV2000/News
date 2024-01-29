@@ -4,8 +4,7 @@ from .models import Post
 from .forms import PostForm
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
-
-
+from django.core.cache import cache
 
 
 class PostsList(ListView):
@@ -25,6 +24,15 @@ class PostDetail(DetailView):
     model = Post
     template_name = 'post.html'
     context_object_name = 'post'
+
+
+def get_object(self, *args, **kwargs):
+    obj = cache.get(f'post-{self.kwargs["pk"]}',
+                        None)
+    if not obj:
+        obj = super().get_object(queryset=self.queryset)
+        cache.set(f'post-{self.kwargs["pk"]}', obj)
+    return obj
 
 
 class PostCreate(CreateView):
